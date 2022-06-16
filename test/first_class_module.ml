@@ -27,11 +27,17 @@ end
 
 let m = (module M : S)
 
-let f ((module M : S) as u) = ignore u ; M.x
+let f ((module M : S) as u) =
+  ignore u;
+  M.x
 
-let f (T {m= (module M)}) = ignore u ; M.x
+let f (T { m = (module M) }) =
+  ignore u;
+  M.x
 
-let f (T {m= (module M : S)}) = ignore u ; M.x
+let f (T { m = (module M : S) }) =
+  ignore u;
+  M.x
 
 let v = f (module M : S with type t = t)
 
@@ -71,29 +77,27 @@ let _ =
   ()
 
 let _ =
-  ( module Ephemeron (HHHHHHHHHHHHHHHHHHHHHHHHHH) (HHHHHHHHHHHHHHHHHHHHHHHHHH)
-  : Ephemeron.S )
+  (module Ephemeron (HHHHHHHHHHHHHHHHHHHHHHHHHH) (HHHHHHHHHHHHHHHHHHHHHHHHHH)
+  : Ephemeron.S)
 
 let _ =
-  ( module Ephemeron (HHHHHHHHHHHHHHHHHHHHHHHHHH) (HHHHHHHHHHHHHHHHHH)
-  : Ephemeron.S )
+  (module Ephemeron (HHHHHHHHHHHHHHHHHHHHHHHHHH) (HHHHHHHHHHHHHHHHHH)
+  : Ephemeron.S)
 
 let _ = (module Ephemeron (HHHHHHHHHHHHHHH) (HHHHHHHHHHHHH) : Ephemeron.S)
-
 let _ = (module Ephemeron (HHH) : Ephemeron.S)
 
 let _ =
-  ( module Ephemeron (struct
+  (module Ephemeron (struct
     type t = t
-  end) : Ephemeron.S )
+  end) : Ephemeron.S)
 
 let _ =
-  ( module struct
+  (module struct
     let a = b
-  end )
+  end)
 
 (* Tests for dropped comment *)
 
 module M = (val x : S (* a *))
-
 module M = (val x (* b *))

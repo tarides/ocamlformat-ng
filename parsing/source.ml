@@ -135,17 +135,18 @@ let source_between (start : Lexing.position) (stop : Lexing.position) =
   String.sub !source pos len
 
 let lexbuf_set_pos lexbuf pos =
-  lexbuf.Lexing.lex_abs_pos <- pos.Lexing.pos_cnum ;
+  lexbuf.Lexing.lex_abs_pos <- pos.Lexing.pos_cnum;
   lexbuf.lex_curr_p <- pos
 
 let loc_of_token_between ~expect_failure ~start ~stop token =
   let sub =
     try source_between start stop
     with Assert_failure _ as exn when not expect_failure ->
-      Format.eprintf "loc_of_token_between %d:%d -- %d:%d: %s@."
-        start.pos_lnum (start.pos_cnum - start.pos_bol)
-        stop.pos_lnum (stop.pos_cnum - stop.pos_bol)
-        (print_tok token) ;
+      Format.eprintf "loc_of_token_between %d:%d -- %d:%d: %s@." start.pos_lnum
+        (start.pos_cnum - start.pos_bol)
+        stop.pos_lnum
+        (stop.pos_cnum - stop.pos_bol)
+        (print_tok token);
       raise exn
   in
   let lexbuf = Lexing.from_string sub in
@@ -153,15 +154,15 @@ let loc_of_token_between ~expect_failure ~start ~stop token =
   lexbuf_set_pos lexbuf start;
   let rec loop () =
     match Lexer.token lexbuf with
-    | Parser.EOF -> 
-      if not expect_failure then
-        Format.eprintf "loc_of_token_between %d:%d -- %d:%d: %s@.\
-                        source: %S@."
-          start.pos_lnum (start.pos_cnum - start.pos_bol)
-          stop.pos_lnum (stop.pos_cnum - stop.pos_bol)
-          (print_tok token) 
-          sub;
-      raise Not_found
+    | Parser.EOF ->
+        if not expect_failure then
+          Format.eprintf "loc_of_token_between %d:%d -- %d:%d: %s@.source: %S@."
+            start.pos_lnum
+            (start.pos_cnum - start.pos_bol)
+            stop.pos_lnum
+            (stop.pos_cnum - stop.pos_bol)
+            (print_tok token) sub;
+        raise Not_found
     | tok when tok = token -> Location.curr lexbuf
     | _ -> loop ()
   in

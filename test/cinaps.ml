@@ -10,18 +10,20 @@ let x1 = 1
 let x = 1
 
 (*$
-  print_newline () ;
+  print_newline ();
   List.iter
     (fun s -> Printf.printf "let ( %s ) = Pervasives.( %s )\n" s s)
-    ["+"; "-"; "*"; "/"]
+    [ "+"; "-"; "*"; "/" ]
 *)
 (*$*)
 let y = 2
 
-(*$ ;; #use "import.cinaps"
+(*$
+  #use "import.cinaps";;
 
-  ;; List.iter all_fields ~f:(fun (name, type_) -> printf "\nexternal get_%s
-  : unit -> %s = \"get_%s\"" name type_ name) *)
+  List.iter all_fields ~f:(fun (name, type_) ->
+      printf "\nexternal get_%s\n  : unit -> %s = \"get_%s\"" name type_ name)
+*)
 external get_name : unit -> string = "get_name"
 
 (*$*)

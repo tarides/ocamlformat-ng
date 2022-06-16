@@ -1,5 +1,4 @@
 let _ = Some_module.Submodule.(a + b)
-
 let _ = A.(a, b)
 
 let _ =
@@ -33,29 +32,27 @@ let _ =
 let () =
   ( (let open Term in
     term_result
-      ( const Phases.phase1 $ arch $ hub_id $ build_dir $ logs_dir
-      $ setup_logs ))
-  , Term.info "phase1" ~doc ~sdocs:Manpage.s_common_options ~exits ~man )
+      (const Phases.phase1 $ arch $ hub_id $ build_dir $ logs_dir $ setup_logs)),
+    Term.info "phase1" ~doc ~sdocs:Manpage.s_common_options ~exits ~man )
 
 let () =
   (let open Arg in
   let doc = "Output all." in
-  value & flag & info ["all"] ~doc)
+  value & flag & info [ "all" ] ~doc)
   $
   let open Arg in
   let doc = "Commit to git." in
-  value & flag & info ["commit"; "c"] ~doc
+  value & flag & info [ "commit"; "c" ] ~doc
 
 let () =
   Arg.(
     let doc = "Output all." in
-    value & flag & info ["all"] ~doc)
+    value & flag & info [ "all" ] ~doc)
   $ Arg.(
       let doc = "Commit to git." in
-      value & flag & info ["commit"; "c"] ~doc)
+      value & flag & info [ "commit"; "c" ] ~doc)
 
 let () = X.(f y i)
-
 let () = X.(i)
 
 let () =
@@ -71,14 +68,13 @@ let () =
   x y z
 
 let x =
-  let Cstruct.{buffer= bigstring; off= offset; len= length} =
-    Cstruct.{toto= foooo}
+  let Cstruct.{ buffer = bigstring; off = offset; len = length } =
+    Cstruct.{ toto = foooo }
   in
   fooooooooo
 
 open A
 open A.B
-
 open A (B)
 
 open struct
@@ -89,7 +85,7 @@ open (
   struct
     type t
   end :
-    T )
+    T)
 
 open (
   struct
@@ -97,14 +93,11 @@ open (
   end :
     sig
       type t
-    end )
+    end)
 
 open (val x)
-
 open (val x)
-
 open [%extension]
-
 open functor (A : T) -> T'
 
 module type T = sig
@@ -139,7 +132,6 @@ let x =
 
 let x =
   let open struct
-    ;;
     let open struct
       let counter = ref 0
     end in
@@ -178,19 +170,46 @@ class a =
   b
 
 let _ =
-  (* a *) let (* b *) open (* c *) struct type t end (* d *) in (* e *)
-  (* f *) let (* g *) open (* h *) A (* i *) (B) (* j *) in (* k *)
+  (* a *)
+  let (* b *) open (* c *) struct
+    type t
+  end
+  (* d *) in
+  (* e *)
+  (* f *)
+  let (* g *) open (* h *) A (* i *) (B) (* j *) in
+  (* k *)
   ()
 
-(* l *) open (* m *) struct
+(* l *)
+open (* m *) struct
   type t
-end (* n *)
+end
+(* n *)
 
 open A
 open B
-open struct type t end
-open functor (A : S) -> struct type t end
-open functor (_ : S) -> struct type t end
+
+open struct
+  type t
+end
+
+open
+  functor
+    (A : S)
+    ->
+    struct
+      type t
+    end
+
+open
+  functor
+    (_ : S)
+    ->
+    struct
+      type t
+    end
+
 open A (B)
 open (A : S)
 open (val x)
@@ -199,23 +218,58 @@ open [%ext]
 let _ =
   let open A in
   let open B in
-  let open struct type t end in
-  let open functor (A : S) -> struct type t end in
-  let open functor (_ : S) -> struct type t end in
+  let open struct
+    type t
+  end in
+  let open
+    functor
+      (A : S)
+      ->
+      struct
+        type t
+      end in
+  let open
+    functor
+      (_ : S)
+      ->
+      struct
+        type t
+      end in
   let open A (B) in
   let open (A : S) in
   let open (val x) in
   let open [%ext] in
   ()
 
-open[@attr] A
-open[@attr] B
-open[@attr] struct type t end
-open[@attr] functor (A : S) -> struct type t end
-open[@attr] functor (_ : S) -> struct type t end
-open[@attr] A (B)
-open[@attr] (A : S)
-open[@attr] (val x)
-open[@attr] [%ext]
+open A [@@attr]
+open B [@@attr]
 
-let g = M.f ((let open M in x) [@attr])
+open struct
+  type t
+end [@@attr]
+
+open
+  functor
+    (A : S)
+    ->
+    struct
+      type t
+    end [@@attr]
+
+open
+  functor
+    (_ : S)
+    ->
+    struct
+      type t
+    end [@@attr]
+
+open A (B) [@@attr]
+open (A : S) [@@attr]
+open (val x) [@@attr]
+open [%ext] [@@attr]
+
+let g =
+  M.f
+    ((let open M in
+     x) [@attr])

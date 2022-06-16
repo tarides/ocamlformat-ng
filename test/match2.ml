@@ -1,49 +1,49 @@
-let _ = match a with A -> (match b with B -> b | C -> c) | D -> D
+let _ = match a with A -> ( match b with B -> b | C -> c) | D -> D
 
 let _ =
   match a with
-  | AAAAAAAAAA ->
-    ( match bbbbbbbbbbbbb with
-    | BBbbbbbbbbbbbbb -> bbbbbbbbbbbb
-    | CCCCCCCCCCCCCCcc -> ccccccccccccccccc )
+  | AAAAAAAAAA -> (
+      match bbbbbbbbbbbbb with
+      | BBbbbbbbbbbbbbb -> bbbbbbbbbbbb
+      | CCCCCCCCCCCCCCcc -> ccccccccccccccccc)
   | DDDDDDDDDDDDDDd -> DDDDDDDDDDDDDDDDdD
 
 let _ =
   match a with
-  | AAAAAAAAAA ->
+  | AAAAAAAAAA -> (
       let x = 3 in
-      ( match bbbbbbbbbbbbb with
+      match bbbbbbbbbbbbb with
       | BBbbbbbbbbbbbbb -> bbbbbbbbbbbb
-      | CCCCCCCCCCCCCCcc -> ccccccccccccccccc )
+      | CCCCCCCCCCCCCCcc -> ccccccccccccccccc)
   | DDDDDDDDDDDDDDd -> DDDDDDDDDDDDDDDDdD
 
 let _ =
   match x with
-  | _ ->
-    ( match
+  | _ -> (
+      match
         something long enough to_break
           _________________________________________________________________
       with
-    | AAAAAAAAAA ->
-        let x = 3 in
-        ( match bbbbbbbbbbbbb with
-        | BBbbbbbbbbbbbbb -> bbbbbbbbbbbb
-        | CCCCCCCCCCCCCCcc -> ccccccccccccccccc )
-    | DDDDDDDDDDDDDDd -> DDDDDDDDDDDDDDDDdD )
+      | AAAAAAAAAA -> (
+          let x = 3 in
+          match bbbbbbbbbbbbb with
+          | BBbbbbbbbbbbbbb -> bbbbbbbbbbbb
+          | CCCCCCCCCCCCCCcc -> ccccccccccccccccc)
+      | DDDDDDDDDDDDDDd -> DDDDDDDDDDDDDDDDdD)
 
 let x =
   let g =
     match x with
-    | `A -> fun id -> (function A -> () | B -> ())
-    | `B -> fun id -> (function A -> () | _ -> ())
+    | `A -> ( fun id -> function A -> () | B -> ())
+    | `B -> ( fun id -> function A -> () | _ -> ())
   in
   ()
 
 let x =
   let g =
     match x with
-    | `A -> (function A -> () | B -> ())
-    | `B -> (function A -> () | _ -> ())
+    | `A -> ( function A -> () | B -> ())
+    | `B -> ( function A -> () | _ -> ())
   in
   ()
 
@@ -55,36 +55,36 @@ let _ = match x with _ -> b >>= fun () -> c
 
 [@@@ocamlformat "break-infix-before-func=false"]
 
-let foo = match foo with 1 -> bar >>= ( function _ -> () ) | other -> ()
+let foo = match foo with 1 -> ( bar >>= function _ -> ()) | other -> ()
 
 let foo =
   match foo with
-  | 1 -> bar >>= ( function a -> fooooo | b -> fooooo | _ -> () )
+  | 1 -> ( bar >>= function a -> fooooo | b -> fooooo | _ -> ())
   | other -> ()
 
 let foo =
   match foo with
-  | 1 ->
-      bar >>= ( function
+  | 1 -> (
+      bar >>= function
       | a -> fooooo
       | b -> fooooo
       | c -> foooooooo foooooooooo fooooooooooooooooooo ()
-      | _ -> () )
+      | _ -> ())
   | other -> ()
 
 let _ =
   match a with
-  | a ->
-    ( match a with
-    | a ->
-        let+ a = b in
-        (match a with a -> a) )
+  | a -> (
+      match a with
+      | a -> (
+          let+ a = b in
+          match a with a -> a))
 
 let _ =
   match a with
-  | a ->
-    ( match a with
-    | a ->
-        let+ a = b in
-        (match a with a -> a)
-    | b -> c )
+  | a -> (
+      match a with
+      | a -> (
+          let+ a = b in
+          match a with a -> a)
+      | b -> c)

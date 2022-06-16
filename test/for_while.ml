@@ -1,14 +1,14 @@
 let () =
   foo
-    ( for i = 1 to 10 do
-        ()
-      done )
+    (for i = 1 to 10 do
+       ()
+     done)
 
 let () =
   foo
-    ( while true do
-        ()
-      done )
+    (while true do
+       ()
+     done)
 
 let _ =
   for i = some expr to 1000 do
@@ -25,8 +25,7 @@ let _ =
 
 let _ =
   for
-    something_big =
-      some big expressionnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn
+    something_big = some big expressionnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn
     to something biggggggggggggggggggggggggggggggg
          alsooooooooooooooooooooooooooooooooooooooooooo
   do
@@ -35,8 +34,7 @@ let _ =
 
 let _ =
   for
-    something_big =
-      some big expressionnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn
+    something_big = some big expressionnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn
     downto something biggggggggggggggggggggggggggggggg
              alsooooooooooooooooooooooooooooooooooooooooooo
   do

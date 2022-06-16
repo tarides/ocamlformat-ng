@@ -10,7 +10,6 @@ include B
 include A
 
 type t = C of int  (** docstring comment *)
-
 type t = C of int [@ocaml.doc " docstring attribute "]
 
 include Mod
@@ -47,7 +46,6 @@ module Comment_placement : sig
   (** Module *)
   module A : sig
     type a
-
     type b
   end
 
@@ -63,7 +61,6 @@ module Comment_placement : sig
   (** Include *)
   include sig
     type a
-
     type b
   end
 
@@ -79,7 +76,6 @@ module Comment_placement : sig
   (** Rec module *)
   module rec A : sig
     type a
-
     type b
   end
 
@@ -89,7 +85,6 @@ module Comment_placement : sig
   (** Module type *)
   module type A = sig
     type a
-
     type b
   end
 
@@ -102,7 +97,8 @@ module Comment_placement : sig
   (* [@@@some attribute] *)
   (* (** Attribute *) *)
 
-  [%%some extension]  (** Extension *)
+  [%%some extension]
+  (** Extension *)
 
   (** A *)
   external a : b = "double_comment"
@@ -116,6 +112,7 @@ module Comment_placement : sig
   module Index : Index.S
   (** This one goes after *)
 
+  (** This one _still_ goes after *)
   module Index2
       (Paramater_module : BAR_LONG_MODULE_TYPE_NAME)
       (Foo : BAR)
@@ -123,20 +120,18 @@ module Comment_placement : sig
       (Foo : BAR)
       (Foo : BAR)
       (Foo : BAR) : sig end
-  (** This one _still_ goes after *)
 
+  (** Doc comment still goes after *)
   module Make (Config : sig
     val blah : string
 
     (* this could be a really long signature *)
   end) : S
-  (** Doc comment still goes after *)
 
   module Gen () : S
   (** Generative functor *)
-
 end = struct
-  type t = {a: int}
+  type t = { a : int }
   (** Type *)
 
   (** Variant declaration *)
@@ -151,14 +146,12 @@ end = struct
   (** Module *)
   module A = struct
     type a = A
-
     type b = B
   end
 
   (** Module *)
   module A : sig
     type a
-
     type b
   end =
     B
@@ -175,7 +168,6 @@ end = struct
   (** Include *)
   include struct
     type a = A
-
     type b = B
   end
 
@@ -191,7 +183,6 @@ end = struct
   (** Rec module *)
   module rec A : B = struct
     type a = A
-
     type b = B
   end
 
@@ -201,7 +192,6 @@ end = struct
   (** Module type *)
   module type A = sig
     type a
-
     type b
   end
 
@@ -233,8 +223,8 @@ end = struct
   (* [@@@some attribute] *)
   (* (** Attribute *) *)
 
-  (** Extension *)[%%some
-  extension]
+  [%%some extension]
+  (** Extension *)
 
   (* ;; *)
   (* (** Eval *) *)
@@ -269,17 +259,24 @@ module A = struct
 end
 
 (* Same with get_pure, except that when we have both "x = t" and "y = t" where t is a primed ident,
-* we add "x = y" to the result. This is crucial for the normalizer, as it tend to drop "x = t" before
-* processing "y = t". If we don't explicitly preserve "x = y", the normalizer cannot pick it up *)
+   * we add "x = y" to the result. This is crucial for the normalizer, as it tend to drop "x = t" before
+   * processing "y = t". If we don't explicitly preserve "x = y", the normalizer cannot pick it up *)
 let _ = ()
 
 (** Tags without text *)
+
 (** @see <Abc> *)
+
 (** @before a *)
+
 (** @deprecated *)
+
 (** @param b *)
+
 (** @raise c *)
+
 (** @return *)
 
 (** @see 'file' *)
+
 (** @see "title" *)
