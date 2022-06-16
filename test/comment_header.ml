@@ -22,14 +22,14 @@ type typ = typ
 
 (* XXXXXXXXXXXXXX XX XXxxxxxxxx *)
 
-
-(* b *)(*******)
-       (*     *)
-       (*     *)
-       (*     *)
-       (*     *)
-       (*******)(* b *)
-
+(* b *)
+(*******)
+(*     *)
+(*     *)
+(*     *)
+(*     *)
+(*******)
+(* b *)
 
 (*******)
 (*     *)
@@ -38,15 +38,14 @@ type typ = typ
 (*     *)
 (*****)
 
-
 (* xxxxxxxxxxxxxxxxx, xxxxxxx xxxxxx (xxxxxxxxxxxxxx) xxxxxxxxx xxxxxxx
    xxxxxxxxxxxxxx xxxxxxxxxxxxx. *)
 (* xx xxxxxxxxxxxxxx, x xxxxxxxxxxxxxx "xxxxxxxxx" xxxxxxxxxxxxxxxxxxxx
    xxxxxxxxxxxxxxxxxx xxxxxxxxxxxxxxxxxxx xxxxx. *)
 
 (* TEST
-  arguments = "???"
-  *)
+   arguments = "???"
+*)
 
 (* On Windows the runtime expand windows wildcards (asterisks and
  * question marks).

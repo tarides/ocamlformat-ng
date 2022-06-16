@@ -21,7 +21,7 @@
 *)
 
 type constant =
-    Const_int of int
+  | Const_int of int
   | Const_char of char
   | Const_string of string * string option
   | Const_float of string
@@ -30,14 +30,11 @@ type constant =
   | Const_nativeint of nativeint
 
 type rec_flag = Nonrecursive | Recursive
-
 type direction_flag = Upto | Downto
 
 (* Order matters, used in polymorphic comparison *)
 type private_flag = Private | Public
-
 type mutable_flag = Immutable | Mutable of Location.t
-
 type virtual_flag = Virtual | Concrete
 
 type private_virtual =
@@ -55,25 +52,18 @@ type mutable_virtual =
   | MV_virt_mut
 
 type override_flag = Override | Fresh
-
 type closed_flag = Closed | Open
-
 type label = string
-
 type and_or_with = And | With
-
-type 'a loc = 'a Location.loc = {
-  txt : 'a;
-  loc : Location.t;
-}
+type 'a loc = 'a Location.loc = { txt : 'a; loc : Location.t }
 
 type label_info = {
-  name: string loc;
-  extra_info: [ `Single_token | `Previous_token of Location.t ];
+  name : string loc;
+  extra_info : [ `Single_token | `Previous_token of Location.t ];
 }
 
 type arg_label =
-    Nolabel
+  | Nolabel
   | Labelled of label_info (*  label:T -> ... *)
   | Optional of label_info (* ?label:T -> ... *)
 

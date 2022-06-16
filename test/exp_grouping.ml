@@ -1,27 +1,26 @@
 let () =
   Lwt_main.run
-    begin
-      let a = "a" in
-      let b = "b" in
-      let c = "c" in
-      Lwt.return "test"
-    end
+    (let a = "a" in
+     let b = "b" in
+     let c = "c" in
+     Lwt.return "test")
 
 let () =
   Lwt_main.run
-    ( let a = "a" in
-      let b = "b" in
-      let c = "c" in
-      Lwt.return "test" )
+    (let a = "a" in
+     let b = "b" in
+     let c = "c" in
+     Lwt.return "test")
 
 let () =
-  List.iter begin fun v ->
-    (* do a lot of things *)
-    let a = "a" in
-    let b = "b" in
-    let c = "c" in
-    ()
-  end values
+  List.iter
+    (fun v ->
+      (* do a lot of things *)
+      let a = "a" in
+      let b = "b" in
+      let c = "c" in
+      ())
+    values
 
 let () =
   List.iter
@@ -35,141 +34,219 @@ let () =
 
 let () =
   foooooooo
-    begin
-      fooooooooooooo ;
-      foooooooo foooooooooooo ;
-      fooooooooooo foooooooooo ;
-      foooooooooooooooo
-    end
+    (fooooooooooooo;
+     foooooooo foooooooooooo;
+     fooooooooooo foooooooooo;
+     foooooooooooooooo)
 
 let () =
   foooooooo
-    ( fooooooooooooo ;
-      foooooooo foooooooooooo ;
-      fooooooooooo foooooooooo ;
-      foooooooooooooooo )
+    (fooooooooooooo;
+     foooooooo foooooooooooo;
+     fooooooooooo foooooooooo;
+     foooooooooooooooo)
 
 let () =
   foooooooo
-    begin
-      if foooooooooooooooooooooooooooo then
-        if foooooooooooooooooooooooooooo then
-          foooooooooooooooooo
-        else foooooooooooooooooooooooooo
-      else
-        if foooooooooooooooooooooooooooooooo then
-          foooooooooooooooooo
-            begin
-              if foooooooooooooooooooooooooooo then
-                if foooooooooooooooooooooooooooo then foooooooooooooooooooooooo
-                else foooooooooooooooooooooooooo
-              else
-              if foooooooooooooooooooooooooooooooo then
-                fooooooooooooooooooooooooooooooooooo
-              else
-              if foooooooooooooooooo then foooooooooooooooooooooooooooooooooo
-              else fooooooooooooooooooooo
-            end
-        else
-          if foooooooooooooooooo then foooooooooooooooooooooooooooooooooo
-          else fooooooooooooooooooooo
-    end
-
-let () =
-  foooooooo
-    ( if foooooooooooooooooooooooooooo then
-        if foooooooooooooooooooooooooooo then foooooooooooooooooooooooo
-        else
-          foooooooooooooooooooooooooooo
-            ( if foooooooooooooooooooooooooooo then
-                if foooooooooooooooooooooooooooo then foooooooooooooooooooooooo
-                else foooooooooooooooooooooooooo
-              else
-              if foooooooooooooooooooooooooooooooo then
-                fooooooooooooooooooooooooooooooooooo
-              else
-              if foooooooooooooooooo then foooooooooooooooooooooooooooooooooo
-              else fooooooooooooooooooooo )
-      else
-        if foooooooooooooooooooooooooooooooo then
+    (if foooooooooooooooooooooooooooo then
+     if foooooooooooooooooooooooooooo then foooooooooooooooooo
+     else foooooooooooooooooooooooooo
+    else if foooooooooooooooooooooooooooooooo then
+      foooooooooooooooooo
+        (if foooooooooooooooooooooooooooo then
+         if foooooooooooooooooooooooooooo then foooooooooooooooooooooooo
+         else foooooooooooooooooooooooooo
+        else if foooooooooooooooooooooooooooooooo then
           fooooooooooooooooooooooooooooooooooo
-        else
-          if foooooooooooooooooo then foooooooooooooooooooooooooooooooooo
-          else fooooooooooooooooooooo )
+        else if foooooooooooooooooo then foooooooooooooooooooooooooooooooooo
+        else fooooooooooooooooooooo)
+    else if foooooooooooooooooo then foooooooooooooooooooooooooooooooooo
+    else fooooooooooooooooooooo)
 
-let _ = a |> let a = b in c
-let _ = ( let a = b in c ) |> d
-let _ = a := let a = b in c
-let _ = ( let a = b in c ) := d
-let _ = a + let a = b in c
-let _ = ( let a = b in c ) + d
-let _ = f ( let a = b in c )
-let _ = ( let a = b in c ) d
-let _ = a#f ( let a = b in c )
-let _ = ( let a = b in c ) #f
-let _ = A ( let a = b in c )
-let _ = `A ( let a = b in c )
-let _ = { x= ( let a = b in c ) }
-let _ = { ( let a = b in c ) with a= b }
-let _ = {< x = let a = b in c >}
-let _ = x <- ( let a = b in c )
-let _ = ( let a = b in c ) .x
-let _ = ( let a = b in c ).x <- d
-let _ = ( ( let a = b in c ) , d )
-let _ = ( let a = b in c :> t )
-let _ = let a = b in c :: d
-let _ = a :: ( let a = b in c )
-let _ = [ ( let a = b in c ) ]
-let _ = [| ( let a = b in c ) |]
+let () =
+  foooooooo
+    (if foooooooooooooooooooooooooooo then
+     if foooooooooooooooooooooooooooo then foooooooooooooooooooooooo
+     else
+       foooooooooooooooooooooooooooo
+         (if foooooooooooooooooooooooooooo then
+          if foooooooooooooooooooooooooooo then foooooooooooooooooooooooo
+          else foooooooooooooooooooooooooo
+         else if foooooooooooooooooooooooooooooooo then
+           fooooooooooooooooooooooooooooooooooo
+         else if foooooooooooooooooo then foooooooooooooooooooooooooooooooooo
+         else fooooooooooooooooooooo)
+    else if foooooooooooooooooooooooooooooooo then
+      fooooooooooooooooooooooooooooooooooo
+    else if foooooooooooooooooo then foooooooooooooooooooooooooooooooooo
+    else fooooooooooooooooooooo)
+
+let _ =
+  a
+  |>
+  let a = b in
+  c
+
+let _ =
+  (let a = b in
+   c)
+  |> d
+
+let _ =
+  a :=
+    let a = b in
+    c
+
+let _ =
+  (let a = b in
+   c)
+  := d
+
+let _ =
+  a
+  +
+  let a = b in
+  c
+
+let _ =
+  (let a = b in
+   c)
+  + d
+
+let _ =
+  f
+    (let a = b in
+     c)
+
+let _ =
+  (let a = b in
+   c)
+    d
+
+let _ =
+  a#f
+    (let a = b in
+     c)
+
+let _ =
+  (let a = b in
+   c)
+    #f
+
+let _ =
+  A
+    (let a = b in
+     c)
+
+let _ =
+  `A
+    (let a = b in
+     c)
+
+let _ =
+  {
+    x =
+      (let a = b in
+       c);
+  }
+
+let _ =
+  {
+    (let a = b in
+     c)
+    with
+    a = b;
+  }
+
+let _ =
+  {<x = let a = b in
+        c>}
+
+let _ =
+  x <-
+    (let a = b in
+     c)
+
+let _ =
+  (let a = b in
+   c)
+    .x
+
+let _ =
+  (let a = b in
+   c).x <-
+    d
+
+let _ =
+  ( (let a = b in
+     c),
+    d )
+
+let _ =
+  (let a = b in
+   c
+    :> t)
+
+let _ =
+  let a = b in
+  c :: d
+
+let _ =
+  a
+  ::
+  (let a = b in
+   c)
+
+let _ =
+  [
+    (let a = b in
+     c);
+  ]
+
+let _ =
+  [|
+    (let a = b in
+     c);
+  |]
 
 [@@@ocamlformat "if-then-else=compact"]
 
 let _ =
-  if x
-  then begin
+  if x then (
     foo.fooooo <- Fooo.foo fooo foo.fooooo;
-    Fooo fooo
-  end
-  else begin
+    Fooo fooo)
+  else (
     foo.fooooo <- Fooo.foo fooo foo.fooooo;
-    Fooo fooo
-  end
+    Fooo fooo)
 
 [@@@ocamlformat "if-then-else=fit-or-vertical"]
 
 let _ =
-  if x
-  then begin
+  if x then (
     foo.fooooo <- Fooo.foo fooo foo.fooooo;
-    Fooo fooo
-  end
-  else begin
+    Fooo fooo)
+  else (
     foo.fooooo <- Fooo.foo fooo foo.fooooo;
-    Fooo fooo
-  end
+    Fooo fooo)
 
 [@@@ocamlformat "if-then-else=keyword-first"]
 
 let _ =
   if x
-  then begin
+  then (
     foo.fooooo <- Fooo.foo fooo foo.fooooo;
-    Fooo fooo
-  end
-  else begin
+    Fooo fooo)
+  else (
     foo.fooooo <- Fooo.foo fooo foo.fooooo;
-    Fooo fooo
-  end
+    Fooo fooo)
 
 [@@@ocamlformat "if-then-else=k-r"]
 
 let _ =
-  if x
-  then begin
+  if x then (
     foo.fooooo <- Fooo.foo fooo foo.fooooo;
     Fooo fooo
-  end
-  else begin
+  ) else (
     foo.fooooo <- Fooo.foo fooo foo.fooooo;
     Fooo fooo
-  end
+  )

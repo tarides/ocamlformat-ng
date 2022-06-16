@@ -11,15 +11,13 @@ let foo () =
 module type S = sig end
 
 type t = (module S)
-
 type 'a monoid_a = (module Monoid with type t = 'a)
-
 type 'a monoid_a = (module Monoid with type F.t = 'a)
 
 let sumi (type a) ((module A) : a monoid_a) (n : a) = A.mappend n A.mempty
 
 module type BAR = sig
-  module rec A : (FOO with type t = < b: B.t >)
+  module rec A : (FOO with type t = < b : B.t >)
   and B : FOO
 end
 
@@ -35,19 +33,14 @@ module type M =
     with module A = A
 
 module U :
-  S
-    with type ttttttttt = int
-     and type uuuuuuuu = int
-     and type vvvvvvvvvvv = int = struct end
+  S with type ttttttttt = int and type uuuuuuuu = int and type vvvvvvvvvvv = int =
+struct end
 
 module U :
-  S
-    with type ttttttttt = int
-     and type uuuuuuu = int
-    with type vvvvvvvvv = int = struct end
+  S with type ttttttttt = int and type uuuuuuu = int with type vvvvvvvvv = int =
+struct end
 
 module U = (val S : S with type t = int and type u = int)
-
 module U = (val S : S with type t = int and type u = int)
 
 module type S = sig
@@ -61,8 +54,7 @@ module type S' = functor
   (B : sig
      type t
    end)
-  (Cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
-   : sig
+  (Cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc : sig
      type t
    end)
   -> S with type t = B.t

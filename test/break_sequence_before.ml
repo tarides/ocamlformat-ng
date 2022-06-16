@@ -2,11 +2,11 @@
 
 let foo x y =
   lazy
-    ( fooooooooooooooooooooooo
-    ; fooooooooooooooooooooooo
-    ;%ext
-      foooooooooooooooooooooooooo
-    ; fooooooooooooooooooooooooo )
+    (fooooooooooooooooooooooo
+     ; fooooooooooooooooooooooo
+     ;%ext
+     foooooooooooooooooooooooooo
+     ; fooooooooooooooooooooooooo)
 
 let _ =
   do_
@@ -30,18 +30,18 @@ let _ =
   ; job_2
   ;%ext
     f
-      ( job_1
-      ; job_2
-      ; job_1
-      ; job_2
-      ; job_1
-      ;%ext
-        job_2
-      ;%ext
-        job_2
-      ; job_1
-      ; job_2
-      ; job_1
-      ; job_2 )
+      (job_1
+       ; job_2
+       ; job_1
+       ; job_2
+       ; job_1
+       ;%ext
+       job_2
+       ;%ext
+       job_2
+       ; job_1
+       ; job_2
+       ; job_1
+       ; job_2)
   ;%ext
     return ()

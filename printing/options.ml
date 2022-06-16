@@ -13,39 +13,28 @@ let accepted_values print ppf values =
   Format.fprintf ppf "accepted values: %a" (print_all ~sep:", " print) values
 
 module Wrappable = struct
-  type t =
-    | Fit_or_vertical
-    | Wrap
+  type t = Fit_or_vertical | Wrap
 
-  let all =
-    [ Fit_or_vertical; Wrap ]
+  let all = [ Fit_or_vertical; Wrap ]
 
   let print ppf t =
     Format.pp_print_string ppf
-      (match t with
-      | Fit_or_vertical -> "fit-or-vertical"
-      | Wrap -> "wrap")
+      (match t with Fit_or_vertical -> "fit-or-vertical" | Wrap -> "wrap")
 
   let parse = function
     | "fit-or-vertical" -> Ok Fit_or_vertical
     | "wrap" -> Ok Wrap
     | s ->
-      let msg = Format.asprintf "%a, got %S" (accepted_values print) all s in
-      Error (`Msg msg)
+        let msg = Format.asprintf "%a, got %S" (accepted_values print) all s in
+        Error (`Msg msg)
 
-  let t =
-    Arg.conv (parse, print)
+  let t = Arg.conv (parse, print)
 end
 
-
 module Smartly_wrappable = struct
-  type t =
-    | Fit_or_vertical
-    | Wrap
-    | Smart
+  type t = Fit_or_vertical | Wrap | Smart
 
-  let all =
-    [ Fit_or_vertical; Smart; Wrap ]
+  let all = [ Fit_or_vertical; Smart; Wrap ]
 
   let print ppf t =
     Format.pp_print_string ppf
@@ -59,74 +48,54 @@ module Smartly_wrappable = struct
     | "wrap" -> Ok Wrap
     | "smart" -> Ok Smart
     | s ->
-      let msg = Format.asprintf "%a, got %S" (accepted_values print) all s in
-      Error (`Msg msg)
+        let msg = Format.asprintf "%a, got %S" (accepted_values print) all s in
+        Error (`Msg msg)
 
-  let t =
-    Arg.conv (parse, print)
+  let t = Arg.conv (parse, print)
 end
 
-
 module Parenthesing = struct
-  type t =
-    | Parens
-    | Begin_end
+  type t = Parens | Begin_end
 
-  let all =
-    [ Parens; Begin_end ]
+  let all = [ Parens; Begin_end ]
 
   let print ppf t =
     Format.pp_print_string ppf
-      (match t with
-      | Parens -> "parentheses"
-      | Begin_end -> "begin-end")
+      (match t with Parens -> "parentheses" | Begin_end -> "begin-end")
 
   let parse = function
     | "parens" | "parentheses" -> Ok Parens
     | "begin-end" | "begin" -> Ok Begin_end
     | s ->
-      let msg = Format.asprintf "%a, got %S" (accepted_values print) all s in
-      Error (`Msg msg)
+        let msg = Format.asprintf "%a, got %S" (accepted_values print) all s in
+        Error (`Msg msg)
 
-  let t =
-    Arg.conv (parse, print)
+  let t = Arg.conv (parse, print)
 end
 
-
 module Always_or_needed = struct
-  type t =
-    | When_needed
-    | Always
+  type t = When_needed | Always
 
-  let all =
-    [ Always; When_needed ]
+  let all = [ Always; When_needed ]
 
   let print ppf t =
     Format.pp_print_string ppf
-      (match t with
-      | Always -> "always"
-      | When_needed -> "when-needed")
+      (match t with Always -> "always" | When_needed -> "when-needed")
 
   let parse = function
     | "always" -> Ok Always
     | "when-needed" -> Ok When_needed
     | s ->
-      let msg = Format.asprintf "%a, got %S" (accepted_values print) all s in
-      Error (`Msg msg)
+        let msg = Format.asprintf "%a, got %S" (accepted_values print) all s in
+        Error (`Msg msg)
 
-  let t =
-    Arg.conv (parse, print)
+  let t = Arg.conv (parse, print)
 end
 
-
 module Always_or_needed_or_nontrivial = struct
-  type t =
-    | When_needed
-    | Always
-    | When_nontrivial
+  type t = When_needed | Always | When_nontrivial
 
-  let all =
-    [ Always; When_needed; When_nontrivial ]
+  let all = [ Always; When_needed; When_nontrivial ]
 
   let simplify : t -> Always_or_needed.t = function
     | When_needed -> When_needed
@@ -145,22 +114,16 @@ module Always_or_needed_or_nontrivial = struct
     | "when-needed" -> Ok When_needed
     | "when-nontrivial" -> Ok When_nontrivial
     | s ->
-      let msg = Format.asprintf "%a, got %S" (accepted_values print) all s in
-      Error (`Msg msg)
+        let msg = Format.asprintf "%a, got %S" (accepted_values print) all s in
+        Error (`Msg msg)
 
-  let t =
-    Arg.conv (parse, print)
+  let t = Arg.conv (parse, print)
 end
 
-
 module Compact_or_multiline = struct
-  type t =
-    | Compact
-    | Multi
-    | Compact_under_app
+  type t = Compact | Multi | Compact_under_app
 
-  let all =
-    [ Compact; Multi; Compact_under_app ]
+  let all = [ Compact; Multi; Compact_under_app ]
 
   let print ppf t =
     Format.pp_print_string ppf
@@ -174,31 +137,25 @@ module Compact_or_multiline = struct
     | "multiline" -> Ok Multi
     | "compact-under-app" -> Ok Compact_under_app
     | s ->
-      let msg = Format.asprintf "%a, got %S" (accepted_values print) all s in
-      Error (`Msg msg)
+        let msg = Format.asprintf "%a, got %S" (accepted_values print) all s in
+        Error (`Msg msg)
 
-  let t =
-    Arg.conv (parse, print)
+  let t = Arg.conv (parse, print)
 end
 
-
-let (:=) ref term =
-  Term.(const (fun x -> ref := x) $ term)
-let docs =
-  "FORMATTING OPTIONS"
+let ( := ) ref term = Term.(const (fun x -> ref := x) $ term)
+let docs = "FORMATTING OPTIONS"
 
 let mk_info print all =
   let docv = Format.asprintf "%a" (print_all print) all in
   Arg.info ~docs ~docv
 
-let width =
-  ref 0
+let width = ref 0
 
 module Record = struct
   open Wrappable
 
-  let expression =
-    ref Fit_or_vertical
+  let expression = ref Fit_or_vertical
 
   let expression_cmd =
     let open Arg in
@@ -206,8 +163,7 @@ module Record = struct
     let info = mk_info print all ~doc [ "record-expr" ] in
     expression := value & opt t Fit_or_vertical info
 
-  let pattern =
-    ref Wrap
+  let pattern = ref Wrap
 
   let pattern_cmd =
     let open Arg in
@@ -216,12 +172,10 @@ module Record = struct
     pattern := value & opt t Wrap info
 end
 
-
 module Match = struct
   module P = Parenthesing
 
-  let parens_style =
-    ref P.Begin_end
+  let parens_style = ref P.Begin_end
 
   let parens_style_cmd =
     let open Arg in
@@ -232,8 +186,7 @@ module Match = struct
     in
     parens_style := value & opt P.t Begin_end info
 
-  let parenthesing_situations =
-    ref Always_or_needed.When_needed
+  let parenthesing_situations = ref Always_or_needed.When_needed
 
   let parens_situations_cmd =
     let open Arg in
@@ -244,26 +197,23 @@ module Match = struct
     in
     parenthesing_situations := value & opt Always_or_needed.t When_needed info
 
-  let compact =
-    ref Compact_or_multiline.Compact_under_app
+  let compact = ref Compact_or_multiline.Compact_under_app
 
   let compact_cmd =
     let open Compact_or_multiline in
     let open Arg in
     let doc =
-      "whether or not to print match expressions on a single line if \
-       it fits. This also applies to functions and try-withs."
+      "whether or not to print match expressions on a single line if it fits. \
+       This also applies to functions and try-withs."
     in
     let info = mk_info print all ~doc [ "match-layout" ] in
     compact := value & opt t Compact_under_app info
 end
 
-
 module If_branch = struct
   module P = Parenthesing
 
-  let parens_style =
-    ref P.Parens
+  let parens_style = ref P.Parens
 
   let parens_style_cmd =
     let open Arg in
@@ -276,8 +226,7 @@ module If_branch = struct
 
   module ANN = Always_or_needed_or_nontrivial
 
-  let parenthesing_situations =
-    ref ANN.When_needed
+  let parenthesing_situations = ref ANN.When_needed
 
   let parens_situations_cmd =
     let open Arg in
@@ -286,10 +235,8 @@ module If_branch = struct
     parenthesing_situations := value & opt ANN.t When_needed info
 end
 
-
 module Cases = struct
-  let body_indent =
-    ref 2
+  let body_indent = ref 2
 
   let body_indent_cmd =
     let open Arg in
@@ -299,8 +246,7 @@ module Cases = struct
     in
     body_indent := value & opt int 2 info
 
-  let body_on_separate_line =
-    ref Always_or_needed.When_needed
+  let body_on_separate_line = ref Always_or_needed.When_needed
 
   let body_on_separate_line_cmd =
     let open Arg in
@@ -310,12 +256,10 @@ module Cases = struct
     body_on_separate_line := value & opt t When_needed info
 end
 
-
 module Applications = struct
   open Smartly_wrappable
 
-  let layout =
-    ref Wrap
+  let layout = ref Wrap
 
   let layout_cmd =
     let open Arg in
@@ -324,10 +268,8 @@ module Applications = struct
     layout := value & opt t Wrap info
 end
 
-
 module Sequences = struct
-  let compact =
-    ref Compact_or_multiline.Compact_under_app
+  let compact = ref Compact_or_multiline.Compact_under_app
 
   let compact_cmd =
     let open Compact_or_multiline in
@@ -338,4 +280,3 @@ module Sequences = struct
     let info = mk_info print all ~doc [ "sequences-layout" ] in
     compact := value & opt t Compact_under_app info
 end
-

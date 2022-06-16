@@ -1,7 +1,8 @@
 type t =
   ([ `foo
-   | `bar  (** 58 chars.................................................. *) ][@js.enum
-                                                                       ])
+   | `bar  (** 58 chars.................................................. *) ]
+  [@js.enum])
+
 let _ =
   aa
     (bbbbbbbbb cccccccccccc dddddddddddddddddddddddddddddddddddddddddddddddddddd)
@@ -12,9 +13,11 @@ let _ =
 
 let _ =
   aa
-    (bbbbbbbbb cccccccccccc ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+    (bbbbbbbbb cccccccccccc
+       ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
      [@dddddddddd])
 
 let _ =
   aa
-    (bbbbbbbbb cccccccccccc dddddddddddddddddddddddddddddddddddddd) [@dddddddddd]
+    (bbbbbbbbb cccccccccccc dddddddddddddddddddddddddddddddddddddd)
+  [@dddddddddd]

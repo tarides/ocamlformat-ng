@@ -1,21 +1,19 @@
 let foooooooo = function
-    | fooooooooooooooooooooooo -> foooooooooooooooooooooooooo
+  | fooooooooooooooooooooooo -> foooooooooooooooooooooooooo
 
 let foooooooo = function
-    | fooooooooooooooooooooooo -> foooooooooooooooooooooooooo
-    | fooooooooooooooooooooooo -> foooooooooooooooooooooooooo
+  | fooooooooooooooooooooooo -> foooooooooooooooooooooooooo
+  | fooooooooooooooooooooooo -> foooooooooooooooooooooooooo
 
 let foo =
   fooooooooo foooooooo ~foooooooo:(function
-      | fooooooooooooooooooooooo -> foooooooooooooooooooooooooo
-      | fooooooooooooooooooooooo -> foooooooooooooooooooooooooo)
+    | fooooooooooooooooooooooo -> foooooooooooooooooooooooooo
+    | fooooooooooooooooooooooo -> foooooooooooooooooooooooooo)
 
 let foooooooo =
-  if fooooooooooo then
-    function
+  if fooooooooooo then function
     | fooooooooooooooooooooooo -> foooooooooooooooooooooooooo
     | fooooooooooooooooooooooo -> foooooooooooooooooooooooooo
-  else
-    function
+  else function
     | fooooooooooooooooooooooo -> foooooooooooooooooooooooooo
     | fooooooooooooooooooooooo -> foooooooooooooooooooooooooo
